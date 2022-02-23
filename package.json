@@ -1,0 +1,14 @@
+{
+  "name": "termii-js",
+  "version": "1.0.0",
+  "description": "An SDK for the termii REST API",
+  "main": "src/termii.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Panam",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.0"
+  }
+}
