@@ -1,7 +1,7 @@
 import * as termii_switch from "./termii_switch";
+import * as termii_token from "./termii_token";
+import * as termii_insight from "./termii_insight";
 import { MediaObjInterface, OptionsInterface } from "./interfaces";
-// import * as termii_token from './termii_token';
-// import * as termii_insight from './termii_insight';
 
 export class Client {
   readonly API_KEY: string;
@@ -249,6 +249,111 @@ export class Client {
       this.API_KEY,
       campaignId
     );
+    return response;
+  }
+
+  async sendToken(
+    messageType: string,
+    numberTo: string,
+    senderId: string,
+    channel: string,
+    pinAttempts: string,
+    pinTimeToLive: number,
+    pinLength: number,
+    pinPlaceholder: string,
+    messageText: string
+  ) {
+    let response: object = await termii_token.sendNewToken(
+      this.API_KEY,
+      messageType,
+      numberTo,
+      senderId,
+      channel,
+      pinAttempts,
+      pinTimeToLive,
+      pinLength,
+      pinPlaceholder,
+      messageText
+    );
+    return response;
+  }
+
+  async voiceToken(
+    phoneNumber: string,
+    pinAttempts: number,
+    pinTimeToLive: number,
+    pinLength: number
+  ) {
+    let response: object = await termii_token.sendVoiceToken(
+      this.API_KEY,
+      phoneNumber,
+      pinAttempts,
+      pinTimeToLive,
+      pinLength
+    );
+    return response;
+  }
+
+  async voiceCall(
+    phoneNumber: string,
+    code: number,
+    pinAttempts: number,
+    pinTimeToLive: number,
+    pinLength: number
+  ) {
+    let response: object = await termii_token.makeVoiceCall(
+      this.API_KEY,
+      phoneNumber,
+      code,
+      pinAttempts,
+      pinTimeToLive,
+      pinLength
+    );
+    return response;
+  }
+
+  async verifyToken(pinId: string, pin: string) {
+    let response: object = await termii_token.verifySentToken(
+      this.API_KEY,
+      pinId,
+      pin
+    );
+    return response;
+  }
+
+  async inAppToken(
+    pinType: string,
+    phoneNumber: string,
+    pinAttempts: number,
+    pinTimeToLive: number,
+    pinLength: number
+  ) {
+    let response: object = await termii_token.sendTokenInApp(
+      this.API_KEY,
+      pinType,
+      phoneNumber,
+      pinAttempts,
+      pinTimeToLive,
+      pinLength
+    );
+    return response;
+  }
+
+  async getBalance() {
+    let response: object = await termii_insight.checkBalance(this.API_KEY);
+    return response;
+  }
+
+  async searchNumber(phoneNumber: string) {
+    let response: object = await termii_insight.checkNumber(
+      this.API_KEY,
+      phoneNumber
+    );
+    return response;
+  }
+
+  async fetchHistory() {
+    let response: object = await termii_insight.getFullHistory(this.API_KEY);
     return response;
   }
 }

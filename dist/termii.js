@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = void 0;
 const termii_switch = require("./termii_switch");
-// import * as termii_token from './termii_token';
-// import * as termii_insight from './termii_insight';
+const termii_token = require("./termii_token");
+const termii_insight = require("./termii_insight");
 class Client {
     constructor(API_KEY) {
         this.API_KEY = API_KEY;
@@ -98,6 +98,38 @@ class Client {
     }
     async fetchCampaignHistory(campaignId) {
         let response = await termii_switch.getCampaignHistory(this.API_KEY, campaignId);
+        return response;
+    }
+    async sendToken(messageType, numberTo, senderId, channel, pinAttempts, pinTimeToLive, pinLength, pinPlaceholder, messageText) {
+        let response = await termii_token.sendNewToken(this.API_KEY, messageType, numberTo, senderId, channel, pinAttempts, pinTimeToLive, pinLength, pinPlaceholder, messageText);
+        return response;
+    }
+    async voiceToken(phoneNumber, pinAttempts, pinTimeToLive, pinLength) {
+        let response = await termii_token.sendVoiceToken(this.API_KEY, phoneNumber, pinAttempts, pinTimeToLive, pinLength);
+        return response;
+    }
+    async voiceCall(phoneNumber, code, pinAttempts, pinTimeToLive, pinLength) {
+        let response = await termii_token.makeVoiceCall(this.API_KEY, phoneNumber, code, pinAttempts, pinTimeToLive, pinLength);
+        return response;
+    }
+    async verifyToken(pinId, pin) {
+        let response = await termii_token.verifySentToken(this.API_KEY, pinId, pin);
+        return response;
+    }
+    async inAppToken(pinType, phoneNumber, pinAttempts, pinTimeToLive, pinLength) {
+        let response = await termii_token.sendTokenInApp(this.API_KEY, pinType, phoneNumber, pinAttempts, pinTimeToLive, pinLength);
+        return response;
+    }
+    async getBalance() {
+        let response = await termii_insight.checkBalance(this.API_KEY);
+        return response;
+    }
+    async searchNumber(phoneNumber) {
+        let response = await termii_insight.checkNumber(this.API_KEY, phoneNumber);
+        return response;
+    }
+    async fetchHistory() {
+        let response = await termii_insight.getFullHistory(this.API_KEY);
         return response;
     }
 }

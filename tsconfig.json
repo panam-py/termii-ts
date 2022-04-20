@@ -4,5 +4,6 @@
         "module": "commonjs",
         "rootDir": "./src",
         "outDir": "./dist"
-    }
+    },
+    "declaration":true
 }
