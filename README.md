@@ -32,7 +32,7 @@ npm install termii-ts
 import * as termii from 'termii-ts'
 
 const client = new termii.Client(
-  "TLP5Z7WVApOTkOtnRckecOGiOyNzY61x8A3LwIdwVNO8PAGhyrslhB6jKKxTHy"
+  API_KEY
 );
 
 
